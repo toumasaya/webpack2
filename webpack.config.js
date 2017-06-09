@@ -9,7 +9,10 @@ module.exports = {
     filename: 'app.bundle.js'
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      hash: true,
+      template: './src/index.html'
+    }),
     new ExtractTextPlugin({
       filename: 'app.css',
       disable: false,
@@ -25,6 +28,11 @@ module.exports = {
           use: ['css-loader', 'sass-loader'],
           publicPath: './dist'
         }),
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
       }
     ]
   },
