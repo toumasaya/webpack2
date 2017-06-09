@@ -1,0 +1,10 @@
+{
+  "name": "webpack2_20170609",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "toumasaya <luffy.w.pirate@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^2.6.1"
+  }
+}
