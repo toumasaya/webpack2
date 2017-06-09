@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "toumasaya <luffy.w.pirate@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "webpack -d --watch",
+    "prod": "webpack -p"
+  },
   "devDependencies": {
     "webpack": "^2.6.1"
   }
