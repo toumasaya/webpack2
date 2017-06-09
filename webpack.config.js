@@ -13,6 +13,11 @@ module.exports = {
       hash: true,
       template: './src/index.html'
     }),
+    new HtmlWebpackPlugin({
+      hash: true,
+      filename: 'contact.html', // 指定 template 要輸出的路徑
+      template: './src/contact.html'
+    }),
     new ExtractTextPlugin({
       filename: 'app.css',
       disable: false,
