@@ -3,18 +3,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: {
+    app: './src/app.js',
+    contact: './src/contact.js'
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'app.bundle.js'
+    filename: '[name].bundle.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
       hash: true,
+      excludeChunks: ['contact'],
       template: './src/index.html'
     }),
     new HtmlWebpackPlugin({
       hash: true,
+      chunks: ['contact'],
       filename: 'contact.html', // 指定 template 要輸出的路徑
       template: './src/contact.html'
     }),
