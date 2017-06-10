@@ -1,4 +1,4 @@
-const css = require('./app.scss');
+const css = require('./app.sass');
 
 let content = document.getElementById('content');
 let p = document.createElement('p');

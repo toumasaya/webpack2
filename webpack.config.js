@@ -44,7 +44,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(scss|sass)$/,
         use: cssConfig
       },
       {
@@ -55,6 +55,13 @@ module.exports = {
       {
         test: /\.pug$/,
         use: ['html-loader', 'pug-html-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          'file-loader?name=images/[name].[ext]',
+          'image-webpack-loader'
+        ]
       }
     ]
   },
