@@ -1,18 +1,20 @@
 const path = require('path');
+const glob = require('glob');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const bootstrapEntryPoints = require('./webpack.bootstrap.config');
+const PurifyCSSPlugin = require('purifycss-webpack');
 
-let isProd = process.env.NODE_ENV === 'production'; // true or false
-let cssDev = ['style-loader', 'css-loader', 'sass-loader'];
-let cssProd = ExtractTextPlugin.extract({
+const isProd = process.env.NODE_ENV === 'production'; // true or false
+const cssDev = ['style-loader', 'css-loader', 'sass-loader'];
+const cssProd = ExtractTextPlugin.extract({
                 fallback: 'style-loader',
                 use: ['css-loader', 'sass-loader'],
                 publicPath: './dist'
               });
-let cssConfig = isProd ? cssProd : cssDev;
-let bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
+const cssConfig = isProd ? cssProd : cssDev;
+const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
 
 module.exports = {
   entry: {
@@ -40,6 +42,11 @@ module.exports = {
       filename: '/css/[name].css',
       disable: !isProd,
       allChunks: true
+    }),
+    // Make sure this is after ExtractTextPlugin!
+    new PurifyCSSPlugin({
+      // Give paths to parse for rules. These should be absolute!
+      paths: glob.sync(path.join(__dirname, 'src/*.html')),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
