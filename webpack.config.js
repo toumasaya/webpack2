@@ -15,13 +15,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       excludeChunks: ['contact'],
-      template: './src/index.html'
+      template: './src/index.pug'
     }),
     new HtmlWebpackPlugin({
       hash: true,
       chunks: ['contact'],
       filename: 'contact.html', // 指定 template 要輸出的路徑
-      template: './src/contact.html'
+      template: './src/contact.pug'
     }),
     new ExtractTextPlugin({
       filename: 'app.css',
@@ -43,6 +43,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.pug$/,
+        use: ['html-loader', 'pug-html-loader']
       }
     ]
   },
